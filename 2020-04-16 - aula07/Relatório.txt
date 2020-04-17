@@ -1,0 +1,7 @@
+Mudamos o termo de "sujeira nos dentes" para placa bacteriana.
+Mudamos o cenário de uma boca, onde a maior parte do espaço era coberto pela língua, para um grid de dentes. Assim, a imagem que começaria amarelada, pode ficar cada vez mais branca conforme a placa é removida pela escova
+Feita pesquisa da imagem para este novo cenário.
+
+Ideias para buffs (símbolos positivos): pinça, maça
+
+Tecnologia definida: JavaScript
