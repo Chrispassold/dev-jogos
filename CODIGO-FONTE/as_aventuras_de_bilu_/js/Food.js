@@ -4,7 +4,7 @@ class Food{
 		this.pos = new Point(x, y);		
 		this.sizeMin = 2;
 		this.sizeMax = 6;
-		this.mainColor = "#000000";		
+		this.mainColor = ut.randomColor();		
 		this.supportColor = ut.color(this.mainColor, 0.5);
 
 		this.size = ut.random(this.sizeMin, this.sizeMax);	

@@ -38,6 +38,7 @@ class SnakeAi extends Snake{
 
 
 	move(player){
+		this.size += 0.1;
 		this.velocity.x = this.force*Math.cos(this.angle);
 		this.velocity.y = this.force*Math.sin(this.angle);
 		for(var i=this.length-1; i>=1; i--){
@@ -48,7 +49,7 @@ class SnakeAi extends Snake{
 			this.arr[i].x -= player.velocity.x;
 			this.arr[i].y -= player.velocity.y;
 
-			this.drawBody(this.arr[i].x, this.arr[i].y, i);
+			// this.drawBody(this.arr[i].x, this.arr[i].y, i);
 		}
 
 		//move head		

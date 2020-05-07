@@ -14,7 +14,7 @@ class Snake {
 		this.angle = ut.random(0, Math.PI);
 
 		this.length = 10;
-		this.MAXSIZE = 50;
+		this.MAXSIZE = 100;
 		this.size = 7;
 
 		// color
