@@ -14,7 +14,7 @@ class Snake {
 		this.angle = ut.random(0, Math.PI);
 
 		this.length = 10;
-		this.MAXSIZE = 12;
+		this.MAXSIZE = 50;
 		this.size = 7;
 
 		// color
@@ -191,7 +191,7 @@ class Snake {
 		grd.addColorStop(0, this.supportColor);
 		grd.addColorStop(1, this.midColor);
 
-		var radius = this.size - (i * 0.01);
+		var radius = this.size - (i * 0.1);
 		if (radius < 0) radius = 1;
 
 		this.ctx.beginPath();
@@ -301,7 +301,7 @@ class Snake {
 	}
 
 	incSize() {
-		if (this.length % 30 == 0) this.size++;
+		this.size++;
 		if (this.size > this.MAXSIZE) this.size = this.MAXSIZE;
 	}
 
