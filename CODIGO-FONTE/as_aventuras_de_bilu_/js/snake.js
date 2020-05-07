@@ -18,7 +18,7 @@ class Snake {
 		this.size = 7;
 
 		// color
-		this.mainColor = mainColor || ut.randomColor();
+		this.mainColor = mainColor || "#FFFFFF";
 		this.midColor = ut.color(this.mainColor, 0.33);
 		this.supportColor = ut.color(this.midColor, 0.33);
 
@@ -153,13 +153,13 @@ class Snake {
 		//head,
 		this.ctx.fillStyle = this.color;
 		this.ctx.beginPath();
-		this.ctx.arc(x, y, this.size *2, 0, 2 * Math.PI);
+		this.ctx.arc(x, y, this.size * 2, 0, 2 * Math.PI);
 		this.ctx.fill();
 
 		//face
 		this.ctx.fillStyle = "whitesmoke";
 		this.ctx.beginPath();
-		this.ctx.arc(x, y, this.size *2, 0, 2 * Math.PI);
+		this.ctx.arc(x, y, this.size * 2, 0, 2 * Math.PI);
 		this.ctx.fill();
 
 		//eye
@@ -212,10 +212,12 @@ class Snake {
 
 		//magic
 		var d = this.size / 2;
-		for (var i = this.length - 1; i >= 1; i--) {
-			this.arr[i].x = this.arr[i - 1].x - d * Math.cos(this.angle);
-			this.arr[i].y = this.arr[i - 1].y - d * Math.sin(this.angle);
-			this.drawBody(this.arr[i].x, this.arr[i].y, i);
+		if (this instanceof SnakeAi) {
+			for (var i = this.length - 1; i >= 1; i--) {
+				this.arr[i].x = this.arr[i - 1].x - d * Math.cos(this.angle);
+				this.arr[i].y = this.arr[i - 1].y - d * Math.sin(this.angle);
+				this.drawBody(this.arr[i].x, this.arr[i].y, i);
+			}
 		}
 
 		this.pos.x += this.velocity.x;
@@ -233,29 +235,29 @@ class Snake {
 	checkBoundary() {
 
 		//left
-		if(this.arr[0].x < game.world.x){
-			this.pos.x = game.world.x + this.size*2;
+		if (this.arr[0].x < game.world.x) {
+			this.pos.x = game.world.x + this.size * 2;
 			this.velocity.x *= -1;
 			this.angle = Math.PI - this.angle;
-		} 
+		}
 
 		//right
-		else if(this.arr[0].x > game.world.x + game.WORLD_SIZE.x){
-			this.pos.x = game.world.x + game.WORLD_SIZE.x - this.size*2;
+		else if (this.arr[0].x > game.world.x + game.WORLD_SIZE.x) {
+			this.pos.x = game.world.x + game.WORLD_SIZE.x - this.size * 2;
 			this.velocity.x *= -1;
-			this.angle = Math.PI- this.angle;			
+			this.angle = Math.PI - this.angle;
 		}
 
 		//up
-		else if(this.arr[0].y < game.world.y){
-			this.pos.y = game.world.y + this.size*2;
+		else if (this.arr[0].y < game.world.y) {
+			this.pos.y = game.world.y + this.size * 2;
 			this.velocity.y *= -1;
 			this.angle = Math.PI - this.angle;
-		} 
+		}
 
 		//down
-		else if(this.arr[0].y > game.world.y + game.WORLD_SIZE.y){
-			this.pos.y = game.world.y + game.WORLD_SIZE.y - this.size*2;
+		else if (this.arr[0].y > game.world.y + game.WORLD_SIZE.y) {
+			this.pos.y = game.world.y + game.WORLD_SIZE.y - this.size * 2;
 			this.velocity.y *= -1;
 			this.angle = Math.PI - this.angle;
 		}
