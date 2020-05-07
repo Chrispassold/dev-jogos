@@ -3,12 +3,15 @@ class Game {
 		this.ctxSnake = ctxSnake;
 		this.ctxFood = ctxFood;
 		this.ctxHex = ctxHex;
+
 		this.WORLD_SIZE = new Point(4000, 2000);
-		this.SCREEN_SIZE = new Point(800, 400);
+		this.SCREEN_SIZE = new Point(window.innerWidth, window.innerHeight);
 		this.world = new Point(-1200, -600);
 		this.snakes = [];
 		this.foods = [];
 		this.bricks = [];
+
+		console.log(this.SCREEN_SIZE)
 	}
 
 	init() {

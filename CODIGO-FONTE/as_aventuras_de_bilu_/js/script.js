@@ -1,7 +1,11 @@
 var canvas = document.getElementById("canvasSnake");
-var ctxSnake = document.getElementById("canvasSnake").getContext("2d");
-var ctxFood = document.getElementById("canvasFood").getContext("2d");
-var ctxHex = document.getElementById("canvasHex").getContext("2d");
+var canvasFood = document.getElementById("canvasFood");
+var canvasHex = document.getElementById("canvasHex");
+
+var ctxSnake = canvas.getContext("2d");
+var ctxFood = canvasFood.getContext("2d");
+var ctxHex = canvasHex.getContext("2d");
+
 var ut = new Util();
 var mouseDown = false,
 	cursor = new Point(0, 0);
@@ -26,6 +30,21 @@ canvas.onmouseup = function(e){
 function start(){	
 	game.init();
 	update();
+
+	// resize the canvas to fill browser window dynamically
+	window.addEventListener('resize', resizeCanvas, false);
+
+	function resizeCanvas() {
+			canvas.width = canvasFood.width = canvasHex.width = window.innerWidth;
+			canvas.height = canvasFood.height = canvasHex.height = window.innerWidth;
+
+			/**
+			 * Your drawings need to be inside this function otherwise they will be reset when 
+			 * you resize the browser window and the canvas goes will be cleared.
+			 */
+			update(); 
+	}
+	resizeCanvas();
 }
 
 
@@ -49,9 +68,3 @@ function update(currentDelta){
 
 
 start();
-
-
-
-
-
-
