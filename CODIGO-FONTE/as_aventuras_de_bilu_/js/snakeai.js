@@ -1,7 +1,7 @@
 class SnakeAi extends Snake{
 	constructor(ctx, name, id, color){	
 
-		super(ctx, name, id, color);
+		super(ctx, name, id, color, 95);
 
 		this.force = 2;				
 		this.pos = new Point(ut.random(-6000, 1800), ut.random(-300, 900));	
@@ -38,7 +38,7 @@ class SnakeAi extends Snake{
 
 
 	move(player){
-		this.size += 0.1;
+		// this.size += 0.1;
 		this.velocity.x = this.force*Math.cos(this.angle);
 		this.velocity.y = this.force*Math.sin(this.angle);
 		for(var i=this.length-1; i>=1; i--){
@@ -63,9 +63,7 @@ class SnakeAi extends Snake{
 		this.arr[0].x -= player.velocity.x;
 		this.arr[0].y -= player.velocity.y;
 
-		if(this.headType == 0) this.drawHeadOneEye();
-		else if(this.headType == 1) this.drawHeadTwoEye();
-		else if(this.headType == 2) this.drawHeadTwoEyeBranch();
+		this.drawHeadOneEye();
 
 
 		this.ctx.beginPath();

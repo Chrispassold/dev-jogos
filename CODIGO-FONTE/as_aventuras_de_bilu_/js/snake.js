@@ -1,5 +1,5 @@
 class Snake {
-	constructor(ctx, name, id, mainColor) {
+	constructor(ctx, name, id, mainColor, max) {
 		this.ctx = ctx;
 		this.name = name;
 		this.id = id;
@@ -14,8 +14,9 @@ class Snake {
 		this.angle = ut.random(0, Math.PI);
 
 		this.length = 10;
-		this.MAXSIZE = 100;
+		this.MAXSIZE = max ? max : 100;
 		this.size = 7;
+		this.countFoodDie = 0;
 
 		// color
 		this.mainColor = mainColor || "#FFFFFF";
@@ -157,7 +158,7 @@ class Snake {
 		this.ctx.fill();
 
 		//face
-		this.ctx.fillStyle = "whitesmoke";
+		this.ctx.fillStyle = this instanceof SnakeAi ? "black" : "whitesmoke";
 		this.ctx.beginPath();
 		this.ctx.arc(x, y, this.size * 2, 0, 2 * Math.PI);
 		this.ctx.fill();
@@ -273,6 +274,7 @@ class Snake {
 			if (ut.cirCollission(x, y, this.size + 3, game.foods[i].pos.x,
 				game.foods[i].pos.y, game.foods[i].size)) {
 				game.foods[i].die();
+				this.countFoodDie++;
 				this.addScore();
 				this.incSize();
 			}
@@ -287,7 +289,11 @@ class Snake {
 			if (s !== this) {
 				for (var j = 0; j < game.snakes[i].arr.length; j += 2) {
 					if (ut.cirCollission(x, y, this.size, s.arr[j].x, s.arr[j].y, s.size)) {
-						this.die();
+						if (this.size > s.size) {
+							s.die();
+						} else {
+							this.die();
+						}
 					}
 				}
 			}
@@ -301,7 +307,10 @@ class Snake {
 	}
 
 	incSize() {
-		this.size++;
+		if (this.countFoodDie == 5) {
+			this.size++;
+			this.countFoodDie = 0;
+		}
 		if (this.size > this.MAXSIZE) this.size = this.MAXSIZE;
 	}
 
@@ -312,7 +321,7 @@ class Snake {
 	die() {
 		this.state = 1;
 		for (var i = 0; i < this.arr.length; i += 3) game.foods.push(new Food(game.ctxFood,
-			this.arr[i].x, this.arr[i].y));
+			0, 0));
 
 		var index = game.snakes.indexOf(this);
 		game.snakes.splice(i, 1);
