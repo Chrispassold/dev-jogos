@@ -36,7 +36,7 @@ function start(){
 
 	function resizeCanvas() {
 			canvas.width = canvasFood.width = canvasHex.width = window.innerWidth;
-			canvas.height = canvasFood.height = canvasHex.height = window.innerWidth;
+			canvas.height = canvasFood.height = canvasHex.height = window.innerHeight;
 
 			/**
 			 * Your drawings need to be inside this function otherwise they will be reset when 

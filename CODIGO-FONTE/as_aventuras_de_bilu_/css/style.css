@@ -28,7 +28,9 @@ body{
 }
 
 #canvasHex{
-	background-color: darkred;
+	background-image: url("../assets/dente.jpg"), linear-gradient(180deg, rgba(215,115,117,1) 50%, rgba(185,86,91,1) 50%);
+	background-repeat: repeat-x;
+	background-position: center;
 	z-index: 1;	
 }
 

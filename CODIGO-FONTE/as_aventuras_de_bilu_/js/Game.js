@@ -4,7 +4,7 @@ class Game {
 		this.ctxFood = ctxFood;
 		this.ctxHex = ctxHex;
 
-		this.WORLD_SIZE = new Point(4000, 2000);
+		this.WORLD_SIZE = new Point(window.innerWidth * 2, window.innerHeight * 2);
 		this.SCREEN_SIZE = new Point(window.innerWidth, window.innerHeight);
 		this.world = new Point(-1200, -600);
 		this.snakes = [];
@@ -12,6 +12,7 @@ class Game {
 		this.bricks = [];
 
 		console.log(this.SCREEN_SIZE)
+		console.log(this.WORLD_SIZE)
 	}
 
 	init() {
@@ -51,7 +52,8 @@ class Game {
 		this.ctxHex.fillStyle = "white";
 		// this.ctxHex.fillRect(this.world.x * 2, this.world.y * 2, this.WORLD_SIZE.x+4, this.WORLD_SIZE.y+4);
 
-		this.ctxHex.fillStyle = "#DED3D3";
+
+		this.ctxHex.fillStyle = 'transparent';
 		this.ctxHex.fillRect(this.world.x, this.world.y, this.WORLD_SIZE.x, this.WORLD_SIZE.y);
 
 		this.world.x -= this.snakes[0].velocity.x;
