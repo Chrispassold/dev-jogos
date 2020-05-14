@@ -1,0 +1,3 @@
+Jorge - Ajustes no tamanho e zoom da partículas e definições sobre o jogo
+Christian Passold - Ajuste no tamanho da tela, controle das bordas e definições sobre o jogo
+Pedro - pesquisa de imagens para o fundo da tela, alteração dos documentos com os novos termos e definições sobre o jogo
