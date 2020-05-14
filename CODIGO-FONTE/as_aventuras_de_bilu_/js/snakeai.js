@@ -75,7 +75,7 @@ class SnakeAi extends Snake{
 		this.ctx.globalAlpha = 1;
 
 		
-		super.checkCollissionFood();	
+		// super.checkCollissionFood();	
 		this.checkCollissionSnake();
 		this.checkBoundary();
 	}
@@ -107,19 +107,7 @@ class SnakeAi extends Snake{
 	}
 
 	checkCollissionSnake(){
-		var x = this.arr[0].x;
-		var y = this.arr[0].y;
-		for (var i = 0; i < game.snakes.length; i++) {
-			var s =  game.snakes[i];
-			if(s !== this){
-				for (var j = 0; j < s.arr.length; j++) {					
-					//death
-					if(ut.cirCollission(x, y, this.size, s.arr[j].x, s.arr[j].y, s.size)){
-						this.die();
-					}       
-				}
-			}			
-		}
+		
 	}
 
 	

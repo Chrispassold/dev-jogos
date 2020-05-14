@@ -51,7 +51,7 @@ class Game {
 		this.ctxHex.fillStyle = "white";
 		// this.ctxHex.fillRect(this.world.x * 2, this.world.y * 2, this.WORLD_SIZE.x+4, this.WORLD_SIZE.y+4);
 
-		this.ctxHex.fillStyle = "darkred";
+		this.ctxHex.fillStyle = "#DED3D3";
 		this.ctxHex.fillRect(this.world.x, this.world.y, this.WORLD_SIZE.x, this.WORLD_SIZE.y);
 
 		this.world.x -= this.snakes[0].velocity.x;

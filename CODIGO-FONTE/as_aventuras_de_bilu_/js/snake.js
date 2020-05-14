@@ -158,7 +158,7 @@ class Snake {
 		this.ctx.fill();
 
 		//face
-		this.ctx.fillStyle = this instanceof SnakeAi ? "black" : "whitesmoke";
+		this.ctx.fillStyle = this instanceof SnakeAi ? "black" : "blue";
 		this.ctx.beginPath();
 		this.ctx.arc(x, y, this.size * 2, 0, 2 * Math.PI);
 		this.ctx.fill();

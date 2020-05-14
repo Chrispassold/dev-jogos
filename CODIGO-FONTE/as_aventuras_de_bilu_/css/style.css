@@ -28,7 +28,7 @@ body{
 }
 
 #canvasHex{
-	background-color: black;
+	background-color: darkred;
 	z-index: 1;	
 }
 
