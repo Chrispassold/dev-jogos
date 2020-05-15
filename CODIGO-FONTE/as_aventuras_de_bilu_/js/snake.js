@@ -4,10 +4,12 @@ class Snake {
 		this.name = name;
 		this.id = id;
 		this.score = 0;
-		this.force = 5;
+		this.force = 1;
 		this.state = 0;
 		this.headType = ut.random(0, 2);
 
+		this.imgAI = document.getElementById('imgBacteria');
+		this.imgSnake = document.getElementById('imgSnake');
 
 		this.pos = new Point(game.SCREEN_SIZE.x / 2, game.SCREEN_SIZE.y / 2);
 		this.velocity = new Point(0, 0); //arbitary point		
@@ -31,121 +33,6 @@ class Snake {
 
 	}
 
-	drawHeadTwoEyeBranch() {
-
-		var x = this.arr[0].x;
-		var y = this.arr[0].y;
-
-		var d = this.size * 1.9;
-		var p1 = new Point(x + d * Math.cos(this.angle), y + d * Math.sin(this.angle));
-		p1 = ut.rotate(p1, this.arr[0], Math.PI / 6)
-		var p2 = ut.rotate(new Point(p1.x, p1.y), this.arr[0], -Math.PI / 3);
-
-
-		//eye1
-		//muscle
-		this.ctx.fillStyle = this.mainColor;
-		this.ctx.beginPath();
-		this.ctx.arc(p1.x, p1.y, this.size / 2 + 2, 0, 2 * Math.PI);
-		this.ctx.fill();
-
-		//eye
-		this.ctx.fillStyle = "whitesmoke";
-		this.ctx.beginPath();
-		this.ctx.arc(p1.x, p1.y, this.size / 2, 0, 2 * Math.PI);
-		this.ctx.fill();
-
-		//retina
-		this.ctx.fillStyle = "black";
-		this.ctx.beginPath();
-		this.ctx.arc(p1.x + Math.cos(this.angle), p1.y + Math.sin(this.angle), this.size / 4, 0, 2 * Math.PI);
-		this.ctx.fill();
-
-
-		//eye2		
-		//muscle
-		this.ctx.fillStyle = this.mainColor;
-		this.ctx.beginPath();
-		this.ctx.arc(p2.x, p2.y, this.size / 2 + 2, 0, 2 * Math.PI);
-		this.ctx.fill();
-
-		//eye
-		this.ctx.fillStyle = "whitesmoke";
-		this.ctx.beginPath();
-		this.ctx.arc(p2.x, p2.y, this.size / 2, 0, 2 * Math.PI);
-		this.ctx.fill();
-
-		//retina
-		this.ctx.fillStyle = "black";
-		this.ctx.beginPath();
-		this.ctx.arc(p2.x + Math.cos(this.angle), p2.y + Math.sin(this.angle), this.size / 4, 0, 2 * Math.PI);
-		this.ctx.fill();
-
-		//head
-		var grd = this.ctx.createRadialGradient(x, y, 2, x + 4, y + 4, 10);
-		grd.addColorStop(0, this.supportColor);
-		grd.addColorStop(1, this.midColor);
-		this.ctx.fillStyle = grd;
-		this.ctx.beginPath();
-		this.ctx.arc(x, y, this.size + 1, 0, 2 * Math.PI);
-		this.ctx.fill();
-
-		// name
-		this.ctx.fillStyle = "whitesmoke";
-		this.ctx.font = "10px Arial";
-		this.ctx.fillText(this.name, x - 10, y - 10);
-
-	}
-
-	drawHeadTwoEye() {
-
-		var x = this.arr[0].x;
-		var y = this.arr[0].y;
-
-		//head
-		this.ctx.fillStyle = this.color;
-		this.ctx.beginPath();
-		this.ctx.arc(x, y, this.size + 1, 0, 2 * Math.PI);
-		this.ctx.fill();
-
-
-		//eye 1
-		var d = this.size / 2;
-		var p1 = new Point(x + d * Math.cos(this.angle), y + d * Math.sin(this.angle));
-		p1 = ut.rotate(p1, this.arr[0], -20);
-		//eye
-		this.ctx.fillStyle = "whitesmoke";
-		this.ctx.beginPath();
-		this.ctx.arc(p1.x, p1.y, this.size / 2, 0, 2 * Math.PI);
-		this.ctx.fill();
-
-		//retina
-		this.ctx.fillStyle = "black";
-		this.ctx.beginPath();
-		this.ctx.arc(p1.x + Math.cos(this.angle), p1.y + Math.sin(this.angle), this.size / 4, 0, 2 * Math.PI);
-		this.ctx.fill();
-
-
-		//eye2
-		var p2 = ut.rotate(p1, this.arr[0], 40);
-		//eye
-		this.ctx.fillStyle = "whitesmoke";
-		this.ctx.beginPath();
-		this.ctx.arc(p2.x, p2.y, this.size / 2, 0, 2 * Math.PI);
-		this.ctx.fill();
-
-		//retina
-		this.ctx.fillStyle = "black";
-		this.ctx.beginPath();
-		this.ctx.arc(p2.x + Math.cos(this.angle), p2.y + Math.sin(this.angle), this.size / 4, 0, 2 * Math.PI);
-		this.ctx.fill();
-
-		//name
-		this.ctx.fillStyle = "whitesmoke";
-		this.ctx.font = "10px Arial";
-		this.ctx.fillText(this.name, x - 5, y - 10);
-
-	}
 
 	drawHeadOneEye() {
 		var x = this.arr[0].x;
@@ -158,32 +45,13 @@ class Snake {
 		this.ctx.fill();
 
 		//face
-		this.ctx.fillStyle = this instanceof SnakeAi ? "black" : "blue";
+		this.ctx.fillStyle = this instanceof SnakeAi ? "black" : "green";
 		this.ctx.beginPath();
+
+		//this.ctx.drawImage(this instanceof SnakeAi ? this.imgAI : this.imgSnake, this.size * 2, this.size * 2);
+
 		this.ctx.arc(x, y, this.size * 2, 0, 2 * Math.PI);
 		this.ctx.fill();
-
-		//eye
-		if (this instanceof SnakeAi) {
-			var d = 2;
-			this.ctx.fillStyle = "black";
-			this.ctx.beginPath();
-			this.ctx.arc(x + d * Math.cos(this.angle), y + d * Math.sin(this.angle), this.size / 1.5, 0, 2 * Math.PI);
-			this.ctx.fill();
-		}
-
-		//retina
-		var d = 3;
-		this.ctx.fillStyle = "back";
-		this.ctx.beginPath();
-		this.ctx.arc(x + d * Math.cos(this.angle), y + d * Math.sin(this.angle), this.size / 4, 0, 2 * Math.PI);
-		this.ctx.fill();
-
-
-		//name
-		this.ctx.fillStyle = "whitesmoke";
-		this.ctx.font = "10px Arial";
-		this.ctx.fillText(this.name, x - 5, y - 10);
 	}
 
 	drawBody(x, y, i) {
@@ -204,7 +72,6 @@ class Snake {
 		this.ctx.beginPath();
 		this.ctx.arc(x, y, radius, 0, 5);
 		this.ctx.fill();
-
 	}
 
 	move() {
@@ -223,11 +90,7 @@ class Snake {
 
 		this.pos.x += this.velocity.x;
 		this.pos.y += this.velocity.y;
-
 		this.drawHeadOneEye();
-		// else if(this.headType == 1) this.drawHeadTwoEye();
-		// else if(this.headType == 2) this.drawHeadTwoEyeBranch();
-
 		this.checkCollissionFood();
 		this.checkCollissionSnake();
 		this.checkBoundary();

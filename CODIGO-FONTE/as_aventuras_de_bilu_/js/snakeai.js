@@ -65,7 +65,6 @@ class SnakeAi extends Snake{
 
 		this.drawHeadOneEye();
 
-
 		this.ctx.beginPath();
 		this.ctx.globalAlpha = 0.5;
 		this.ctx.fillStyle = "white";
@@ -73,7 +72,6 @@ class SnakeAi extends Snake{
  		this.ctx.arc(this.pos.x, this.pos.y, this.shield, 0, 2*Math.PI);		
 		this.ctx.fill();
 		this.ctx.globalAlpha = 1;
-
 		
 		// super.checkCollissionFood();	
 		this.checkCollissionSnake();

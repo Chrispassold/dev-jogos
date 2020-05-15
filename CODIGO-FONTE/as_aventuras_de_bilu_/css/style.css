@@ -38,3 +38,8 @@ body{
 	background-color: transparent;
 	z-index: 3;
 }
+
+.hdn {
+	visibility: hidden !important;
+	display: none !important;
+}
