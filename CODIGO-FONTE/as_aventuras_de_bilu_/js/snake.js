@@ -11,9 +11,12 @@ class Snake {
 
     //Configura a imagem do player
     this.playerImage = new Image();
-    this.playerImage.src = "assets/sprite_escova.png";
+    this.playerImage.src = SPRITE_SRC;
     this.playerImage.currentX = 0;
-    this.playerImage.currentY = 0;
+	this.playerImage.currentY = 0;
+	
+	this.enemyImage = new Image();
+    this.enemyImage.src = IMAGE_ENEMY_SRC;
 
     //
     this.pos = new Point(game.SCREEN_SIZE.x / 2, game.SCREEN_SIZE.y / 2);
@@ -42,18 +45,18 @@ class Snake {
     var y = this.arr[0].y;
 
     if (this instanceof SnakeAi) {
-      //head,
-      this.ctx.fillStyle = this.color;
-      this.ctx.beginPath();
-      this.ctx.arc(x, y, this.size * 2, 0, 2 * Math.PI);
-      this.ctx.fill();
-
-      //face
-      this.ctx.fillStyle = this instanceof SnakeAi ? "black" : "green";
-      this.ctx.beginPath();
-
-      this.ctx.arc(x, y, this.size * 2, 0, 2 * Math.PI);
-      this.ctx.fill();
+	  this.ctx.drawImage(
+        this.enemyImage,
+        0,
+        0,
+        IMAGE_ENEMY_WIDTH,
+        IMAGE_ENEMY_HEIGHT,
+        x,
+        y,
+        IMAGE_ENEMY_WIDTH,
+        IMAGE_ENEMY_HEIGHT
+      );
+	  
     } else {
       this.ctx.drawImage(
         this.playerImage,
