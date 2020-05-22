@@ -41,8 +41,20 @@ class Snake {
     var x = this.arr[0].x;
     var y = this.arr[0].y;
 
-	console.log(this.arr[0])
-    if (!(this instanceof SnakeAi)) {
+    if (this instanceof SnakeAi) {
+      //head,
+      this.ctx.fillStyle = this.color;
+      this.ctx.beginPath();
+      this.ctx.arc(x, y, this.size * 2, 0, 2 * Math.PI);
+      this.ctx.fill();
+
+      //face
+      this.ctx.fillStyle = this instanceof SnakeAi ? "black" : "green";
+      this.ctx.beginPath();
+
+      this.ctx.arc(x, y, this.size * 2, 0, 2 * Math.PI);
+      this.ctx.fill();
+    } else {
       this.ctx.drawImage(
         this.playerImage,
         this.playerImage.currentX,
