@@ -1,0 +1,3 @@
+Jorge: Ajuste no na movimentação do layer do mapa
+Christian - Adicionado imagem do player e dos inimigos
+Pedro: Desenho das novas imagens em diferentes tamanhos
