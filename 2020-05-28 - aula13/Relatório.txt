@@ -1,0 +1,3 @@
+Christian - Alterações de escopo e refatoração para que a escova seja o cursor da pagina
+Pedro - Pesquisa e desenho de novas imagens para a nova proposta de gameplay: escova e bolhas
+Jorge - Trabalhando no movimento da escova ao invés do mundo
