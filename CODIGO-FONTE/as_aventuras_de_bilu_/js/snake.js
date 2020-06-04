@@ -4,18 +4,11 @@ class Snake {
     this.name = name;
     this.id = id;
     this.score = 0;
-    this.force = 5;
+    this.force = 0;
     this.state = 0;
     this.headType = ut.random(0, 2);
-    this.playerImage = null;
 
-    //Configura a imagem do player
-    this.playerImage = new Image();
-    this.playerImage.src = SPRITE_SRC;
-    this.playerImage.currentX = 0;
-	this.playerImage.currentY = 0;
-	
-	this.enemyImage = new Image();
+    this.enemyImage = new Image();
     this.enemyImage.src = IMAGE_ENEMY_SRC;
 
     //
@@ -45,7 +38,7 @@ class Snake {
     var y = this.arr[0].y;
 
     if (this instanceof SnakeAi) {
-	  this.ctx.drawImage(
+      this.ctx.drawImage(
         this.enemyImage,
         0,
         0,
@@ -55,19 +48,6 @@ class Snake {
         y,
         IMAGE_ENEMY_WIDTH,
         IMAGE_ENEMY_HEIGHT
-      );
-	  
-    } else {
-      this.ctx.drawImage(
-        this.playerImage,
-        this.playerImage.currentX,
-        this.playerImage.currentY,
-        SPRITE_WIDTH,
-        SPRITE_HEIGHT,
-        game.SCREEN_SIZE.x / 2,
-        game.SCREEN_SIZE.y / 2,
-        SPRITE_WIDTH,
-        SPRITE_HEIGHT
       );
     }
   }
