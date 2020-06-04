@@ -21,11 +21,6 @@ class Snake {
     this.size = 7;
     this.countFoodDie = 0;
 
-    // color
-    this.mainColor = mainColor || "#FFFFFF";
-    this.midColor = ut.color(this.mainColor, 0.33);
-    this.supportColor = ut.color(this.midColor, 0.33);
-
     this.arr = [];
     this.arr.push(new Point(game.SCREEN_SIZE.x / 2, game.SCREEN_SIZE.y / 2));
     for (var i = 1; i < this.length; i++) {
@@ -64,25 +59,6 @@ class Snake {
     }
   }
 
-  drawBody(x, y, i) {
-    var grd = this.ctx.createRadialGradient(x, y, 2, x + 4, y + 4, 10);
-    grd.addColorStop(0, this.supportColor);
-    grd.addColorStop(1, this.midColor);
-
-    var radius = this.size - i * 0.1;
-    if (radius < 0) radius = 1;
-
-    this.ctx.beginPath();
-    this.ctx.fillStyle = this.mainColor;
-    this.ctx.arc(x, y, radius + 1, 0, 0);
-    this.ctx.fill();
-
-    this.ctx.fillStyle = grd;
-    this.ctx.beginPath();
-    this.ctx.arc(x, y, radius, 0, 5);
-    this.ctx.fill();
-  }
-
   move() {
     this.velocity.x = this.force * Math.cos(this.angle);
     this.velocity.y = this.force * Math.sin(this.angle);
@@ -93,7 +69,6 @@ class Snake {
       for (var i = this.length - 1; i >= 1; i--) {
         this.arr[i].x = this.arr[i - 1].x - d * Math.cos(this.angle);
         this.arr[i].y = this.arr[i - 1].y - d * Math.sin(this.angle);
-        this.drawBody(this.arr[i].x, this.arr[i].y, i);
       }
     }
 
@@ -182,14 +157,6 @@ class Snake {
     this.length++;
     this.score++;
     this.arr.push(new Point(-100, -100));
-  }
-
-  incSize() {
-    if (this.countFoodDie == 5) {
-      this.size++;
-      this.countFoodDie = 0;
-    }
-    if (this.size > this.MAXSIZE) this.size = this.MAXSIZE;
   }
 
   changeAngle(angle) {
