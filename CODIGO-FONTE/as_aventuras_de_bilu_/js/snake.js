@@ -31,13 +31,25 @@ class Snake {
     for (var i = 1; i < this.length; i++) {
       this.arr.push(new Point(this.arr[i - 1].x, this.arr[i - 1].y));
     }
+
+    if (!this.isAi()) {
+      document.onmousemove = (event) => {
+        this.arr[0].x = event.clientX;
+        this.arr[0].y = event.clientY;
+        this.move();
+      };
+    }
+  }
+
+  isAi() {
+    return this instanceof SnakeAi;
   }
 
   drawHeadOneEye() {
     var x = this.arr[0].x;
     var y = this.arr[0].y;
 
-    if (this instanceof SnakeAi) {
+    if (this.isAi()) {
       this.ctx.drawImage(
         this.enemyImage,
         0,
@@ -77,7 +89,7 @@ class Snake {
 
     //magic
     var d = this.size / 2;
-    if (this instanceof SnakeAi) {
+    if (this.isAi()) {
       for (var i = this.length - 1; i >= 1; i--) {
         this.arr[i].x = this.arr[i - 1].x - d * Math.cos(this.angle);
         this.arr[i].y = this.arr[i - 1].y - d * Math.sin(this.angle);
@@ -132,7 +144,7 @@ class Snake {
         ut.cirCollission(
           x,
           y,
-          this.size + 3,
+          this.size,
           game.foods[i].pos.x,
           game.foods[i].pos.y,
           game.foods[i].size
@@ -141,7 +153,6 @@ class Snake {
         game.foods[i].die();
         this.countFoodDie++;
         this.addScore();
-        this.incSize();
       }
     }
   }
