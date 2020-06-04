@@ -23,27 +23,11 @@
       position: relative;
       left: 0;
       top: 0;
-      width: 200px;
+      padding: 20px;
       background: rgba(0, 0, 0, 0.8);
       cursor: pointer;
-    }
-
-    .hover {
+      text-align: center;
       text-decoration: none;
-    }
-
-    .hover:hover div {
-      transition: all 0.5s;
-      background: rgba(255, 255, 255, 0.6);
-      color: black !important;
-      text-decoration: none !important;
-    }
-
-    input {
-      background: rgba(0, 0, 0, 0.8);
-      padding: 10px;
-      width: 175px;
-      color: white;
     }
 
     input::placeholder {
@@ -63,19 +47,10 @@
 <body style="overflow: hidden; margin: 0px; padding: 0px;">
   <div id="container">
     <img src="./assets/background.JPG" />
-    <div class="slide one">
-      <input id="val" placeholder="Digite seu nome" onkeydown="key(this)">
-      <a href="index.html" class="hover">
-        <div
-          style="padding-top: 25%; text-align: center; color: white; border: solid 1px #888888; padding-bottom: 20%;">
-          Inciar novo jogo</div>
-      </a>
-      <a class="hover">
-      <div class="hover"
-        style="padding-top: 25%; text-align: center; color: white; border: solid 1px #888888; padding-bottom: 20%;">
-        Pontuações</div>
-      </a>
-    </div>
+    <a href="index2.html" class="slide one">
+      <div style="font-size: 100px; color: white;">Game over</div>
+      <span style="font-size: 30px; color: white; text-align: center;">Tentar novamente</span>
+    </a>
   </div>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.3.0/gsap.min.js"></script>
