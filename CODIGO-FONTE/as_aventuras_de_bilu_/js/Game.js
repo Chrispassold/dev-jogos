@@ -10,12 +10,19 @@ class Game {
 		this.snakes = [];
 		this.foods = [];
 		this.bricks = [];
+		this.secconds = 10;
 	}
 
 	init() {
-		this.snakes[0] = new Snake(this.ctxSnake, "Bibhuti", 0);
+		this.snakes[0] = new Snake(this.ctxSnake, localStorage.getItem('name'), 0);
 		for (var i = 0; i < 10; i++) this.addSnake(ut.randomName(), 100);
 		this.generateFoods(20);
+		setInterval(() => {
+			this.secconds--;
+			if (this.secconds === 0) {
+				window.location.href="gamehomer.html"
+			}
+		}, 1000);
 	}
 
 	draw() {
@@ -25,6 +32,8 @@ class Game {
 
 		//draw food
 		for (var i = 0; i < this.foods.length; i++) this.foods[i].draw(this.snakes[0]);
+
+		this.drawScore();
 
 	}
 
@@ -54,6 +63,16 @@ class Game {
 		}
 
 
+	}
+
+	drawScore() {
+		var start = new Point(20, 20);
+		if (this.snakes && this.snakes.length > 0) {
+			this.ctxSnake.fillStyle = this.snakes[0].mainColor;
+			this.ctxSnake.font = "bold 20px Arial";
+			this.ctxSnake.fillText(this.snakes[0].name + " " + this.snakes[0].score + ' pontos' + ', tempo restante: ' + this.secconds + ' segundos',
+				start.x - 5, start.y + 0 * 15);
+		}
 	}
 
 	addSnake(name, id) {
