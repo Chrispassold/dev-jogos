@@ -1,12 +1,10 @@
 class Snake {
-    constructor(ctx, name, id, mainColor, max) {
+    constructor(ctx, name, id) {
         this.ctx = ctx;
         this.name = name;
-        this.id = id;
         this.score = 0;
         this.force = 0;
         this.state = 0;
-        this.headType = ut.random(0, 2);
 
         this.enemyImage = new Image();
         this.enemyImage.src = IMAGE_ENEMY_SRC;
@@ -17,20 +15,15 @@ class Snake {
         this.angle = ut.random(0, Math.PI);
 
         this.length = 10;
-        this.MAXSIZE = max ? max : 100;
         this.size = 7;
         this.countFoodDie = 0;
 
-        this.arr = [];
-        this.arr.push(new Point(game.SCREEN_SIZE.x / 2, game.SCREEN_SIZE.y / 2));
-        for (var i = 1; i < this.length; i++) {
-            this.arr.push(new Point(this.arr[i - 1].x, this.arr[i - 1].y));
-        }
+        this.position = new Point(0,0)
 
         if (!this.isAi()) {
             document.onmousemove = (event) => {
-                this.arr[0].x = event.clientX;
-                this.arr[0].y = event.clientY;
+                this.position.x = event.clientX;
+                this.position.y = event.clientY;
                 this.move();
             };
         }
@@ -40,71 +33,43 @@ class Snake {
         return this instanceof SnakeAi;
     }
 
-    drawHeadOneEye() {
-        var x = this.arr[0].x;
-        var y = this.arr[0].y;
-
-        if (this.isAi()) {
-            this.ctx.drawImage(
-                this.enemyImage,
-                0,
-                0,
-                IMAGE_ENEMY_WIDTH,
-                IMAGE_ENEMY_HEIGHT,
-                x,
-                y,
-                IMAGE_ENEMY_WIDTH,
-                IMAGE_ENEMY_HEIGHT
-            );
-        }
-    }
-
     move() {
         this.velocity.x = this.force * Math.cos(this.angle);
         this.velocity.y = this.force * Math.sin(this.angle);
-
-        //magic
-        var d = this.size / 2;
-        if (this.isAi()) {
-            for (var i = this.length - 1; i >= 1; i--) {
-                this.arr[i].x = this.arr[i - 1].x - d * Math.cos(this.angle);
-                this.arr[i].y = this.arr[i - 1].y - d * Math.sin(this.angle);
-            }
-        }
-
         this.pos.x += this.velocity.x;
         this.pos.y += this.velocity.y;
-        this.drawHeadOneEye();
+
         this.checkCollissionFood();
-        this.checkCollissionSnake();
+        // this.checkCollissionSnake();
         this.checkBoundary();
     }
 
     checkBoundary() {
+
         //left
-        if (this.arr[0].x < game.world.x) {
-            this.pos.x = game.world.x + this.size * 2;
+        if (this.position.x < game.world.x) {
+            //this.pos.x = game.world.x + this.size * 2;
             this.velocity.x *= -1;
             this.angle = Math.PI - this.angle;
         }
 
         //right
-        else if (this.arr[0].x > game.world.x + game.WORLD_SIZE.x) {
-            this.pos.x = game.world.x + game.WORLD_SIZE.x - this.size * 2;
+        else if (this.position.x > game.world.x + game.WORLD_SIZE.x) {
+            //this.pos.x = game.world.x + game.WORLD_SIZE.x - this.size * 2;
             this.velocity.x *= -1;
             this.angle = Math.PI - this.angle;
         }
 
         //up
-        else if (this.arr[0].y < game.world.y) {
-            this.pos.y = game.world.y + this.size * 2;
+        else if (this.position.y < game.world.y) {
+            // this.pos.y = game.world.y + this.size * 2;
             this.velocity.y *= -1;
             this.angle = Math.PI - this.angle;
         }
 
         //down
-        else if (this.arr[0].y > game.world.y + game.WORLD_SIZE.y) {
-            this.pos.y = game.world.y + game.WORLD_SIZE.y - this.size * 2;
+        else if (this.position.y > game.world.y + game.WORLD_SIZE.y) {
+            // this.pos.y = game.world.y + game.WORLD_SIZE.y - this.size * 2;
             this.velocity.y *= -1;
             this.angle = Math.PI - this.angle;
         }
@@ -112,8 +77,9 @@ class Snake {
 
     //check snake and food collission
     checkCollissionFood() {
-        var x = this.arr[0].x;
-        var y = this.arr[0].y;
+        var x = this.position.x;
+        var y = this.position.y;
+
         for (var i = 0; i < game.foods.length; i++) {
             if (
                 ut.cirCollission(
@@ -132,35 +98,30 @@ class Snake {
         }
     }
 
-    checkCollissionSnake() {
-        var x = this.arr[0].x;
-        var y = this.arr[0].y;
-        for (var i = 0; i < game.snakes.length; i++) {
-            var s = game.snakes[i];
-            if (s !== this) {
-                for (var j = 0; j < game.snakes[i].arr.length; j += 2) {
-                    if (
-                        ut.cirCollission(x, y, this.size, s.arr[j].x, s.arr[j].y, s.size)
-                    ) {
-                        if (this.size > s.size) {
-                            s.die();
-                        } else {
-                            this.die();
-                        }
-                    }
-                }
-            }
-        }
-    }
+    // checkCollissionSnake() {
+    //     var x = this.position.x;
+    //     var y = this.position.y;
+    //     for (var i = 0; i < game.snakes.length; i++) {
+    //         var s = game.snakes[i];
+    //         if (s !== this) {
+    //             for (var j = 0; j < game.snakes[i].arr.length; j += 2) {
+    //                 if (
+    //                     ut.cirCollission(x, y, this.size, s.arr[j].x, s.arr[j].y, s.size)
+    //                 ) {
+    //                     if (this.size > s.size) {
+    //                         s.die();
+    //                     } else {
+    //                         this.die();
+    //                     }
+    //                 }
+    //             }
+    //         }
+    //     }
+    // }
 
     addScore() {
         this.length++;
         this.score++;
-        this.arr.push(new Point(-100, -100));
-    }
-
-    changeAngle(angle) {
-        this.angle = angle;
     }
 
     die() {
