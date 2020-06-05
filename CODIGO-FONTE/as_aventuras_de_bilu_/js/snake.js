@@ -12,9 +12,7 @@ class Snake {
         //
         this.pos = new Point(game.SCREEN_SIZE.x / 2, game.SCREEN_SIZE.y / 2);
         this.velocity = new Point(0, 0); //arbitary point
-        this.angle = ut.random(0, Math.PI);
 
-        this.length = 10;
         this.size = 7;
         this.countFoodDie = 0;
 
@@ -40,7 +38,6 @@ class Snake {
         this.pos.y += this.velocity.y;
 
         this.checkCollissionFood();
-        // this.checkCollissionSnake();
         this.checkBoundary();
     }
 
@@ -94,38 +91,7 @@ class Snake {
         }
     }
 
-    // checkCollissionSnake() {
-    //     var x = this.position.x;
-    //     var y = this.position.y;
-    //     for (var i = 0; i < game.snakes.length; i++) {
-    //         var s = game.snakes[i];
-    //         if (s !== this) {
-    //             for (var j = 0; j < game.snakes[i].arr.length; j += 2) {
-    //                 if (
-    //                     ut.cirCollission(x, y, this.size, s.arr[j].x, s.arr[j].y, s.size)
-    //                 ) {
-    //                     if (this.size > s.size) {
-    //                         s.die();
-    //                     } else {
-    //                         this.die();
-    //                     }
-    //                 }
-    //             }
-    //         }
-    //     }
-    // }
-
     addScore() {
-        this.length++;
         this.score++;
-    }
-
-    die() {
-        this.state = 1;
-        for (var i = 0; i < this.arr.length; i += 3)
-            game.foods.push(new Food(game.ctxFood, 0, 0));
-
-        var index = game.snakes.indexOf(this);
-        game.snakes.splice(i, 1);
     }
 }

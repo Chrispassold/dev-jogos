@@ -13,7 +13,7 @@ class Game {
 
     init() {
         this.snakes[0] = new Snake(this.ctxSnake, localStorage.getItem('name'), 0);
-        for (var i = 0; i < 10; i++) this.addSnake(ut.randomName(), 100);
+        for (var i = 0; i < ENEMY_QUANTITY; i++) this.addSnake(ut.randomName(), i + 1);
 
         this.generateFoods(GAME_FOOD_QUANTITY);
 

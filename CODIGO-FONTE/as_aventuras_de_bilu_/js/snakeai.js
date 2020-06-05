@@ -5,7 +5,7 @@ class SnakeAi extends Snake {
 
         this.force = 4;
         this.pos = new Point(ut.random(0, WORLD_SIZE.x), ut.random(0, WORLD_SIZE.y));
-        this.length = ut.random(40, 50);
+        this.angle = ut.random(0, Math.PI);
 
         this.initAiMovement();
     }
@@ -33,7 +33,7 @@ class SnakeAi extends Snake {
     move(player) {
         super.move()
         this.drawHeadOneEye();
-        // this.checkCollissionSnake();
+        super.checkCollissionFood()
     }
 
     drawHeadOneEye() {
