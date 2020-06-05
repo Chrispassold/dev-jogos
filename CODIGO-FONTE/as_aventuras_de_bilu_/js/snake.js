@@ -48,28 +48,24 @@ class Snake {
 
         //left
         if (this.position.x < game.world.x) {
-            //this.pos.x = game.world.x + this.size * 2;
             this.velocity.x *= -1;
             this.angle = Math.PI - this.angle;
         }
 
         //right
         else if (this.position.x > game.world.x + game.WORLD_SIZE.x) {
-            //this.pos.x = game.world.x + game.WORLD_SIZE.x - this.size * 2;
             this.velocity.x *= -1;
             this.angle = Math.PI - this.angle;
         }
 
         //up
         else if (this.position.y < game.world.y) {
-            // this.pos.y = game.world.y + this.size * 2;
             this.velocity.y *= -1;
             this.angle = Math.PI - this.angle;
         }
 
         //down
         else if (this.position.y > game.world.y + game.WORLD_SIZE.y) {
-            // this.pos.y = game.world.y + game.WORLD_SIZE.y - this.size * 2;
             this.velocity.y *= -1;
             this.angle = Math.PI - this.angle;
         }
