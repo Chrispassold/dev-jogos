@@ -4,6 +4,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
+    integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
   <title>As aventuras de bilu</title>
   <style>
     #container {
@@ -19,30 +21,12 @@
     }
 
     .slide {
-      display: block;
-      position: relative;
-      left: 0;
-      top: 0;
-      width: 200px;
+      width: 100%;
       background: rgba(0, 0, 0, 0.8);
-      cursor: pointer;
-    }
-
-    .hover {
-      text-decoration: none;
-    }
-
-    .hover:hover div {
-      transition: all 0.5s;
-      background: rgba(255, 255, 255, 0.6);
-      color: black !important;
-      text-decoration: none !important;
     }
 
     input {
       background: rgba(0, 0, 0, 0.8);
-      padding: 10px;
-      width: 175px;
       color: white;
     }
 
@@ -61,20 +45,30 @@
 </head>
 
 <body style="overflow: hidden; margin: 0px; padding: 0px;">
-  <div id="container">
+  <div class="container-fluid">
     <img src="./assets/background.JPG" />
-    <div class="slide one">
-      <input id="val" placeholder="Digite seu nome" onkeydown="key(this)">
-      <a href="index.html" class="hover">
-        <div
-          style="padding-top: 25%; text-align: center; color: white; border: solid 1px #888888; padding-bottom: 20%;">
-          Inciar novo jogo</div>
-      </a>
-      <a class="hover">
-      <div class="hover"
-        style="padding-top: 25%; text-align: center; color: white; border: solid 1px #888888; padding-bottom: 20%;">
-        Pontuações</div>
-      </a>
+    <div class="row">
+      <div class="slide one col-md-3 offset-md-2">
+        <h1 style="color: white; text-align: center;">Novo jogo</h1>
+        <input id="val" class="form-control" placeholder="Digite seu nome" onkeydown="key(this)">
+        <br>
+        <a href="index.html" class="btn btn-dark">
+          Inciar novo jogo
+        </a>
+        <br>
+      </div>
+      <div class="col-md-6 offset-md-1">
+        <div class="slide one">
+          <h1>Pontuações</h1>
+          <table class="table table-dark">
+            <thead>
+              <th>Nome</th>
+              <th>Pontuação</th>
+              <th>Tempo</th>
+            </thead>
+          </table>
+        </div>
+      </div>
     </div>
   </div>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
