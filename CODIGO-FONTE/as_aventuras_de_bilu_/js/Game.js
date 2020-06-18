@@ -8,7 +8,7 @@ class Game {
         this.world = new Point(-1200, -600);
         this.snakes = [];
         this.foods = [];
-        this.seconds = 10;
+        this.seconds = 2000;
     }
 
     init() {
@@ -52,7 +52,7 @@ class Game {
 
     generateFoods(n) {
         for (var i = 0; i < n; i++) {
-            this.foods.push(new Food(this.ctxFood, ut.random(this.world.x - 50, 2800 - 50), ut.random(this.world.y + 50, 1400 - 50)));
+            this.foods.push(new Food(this.ctxFood, ut.random(0, SCREEN_SIZE.x), ut.random(0, SCREEN_SIZE.y)));
         }
     }
 

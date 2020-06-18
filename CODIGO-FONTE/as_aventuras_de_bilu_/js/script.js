@@ -11,6 +11,22 @@ var game = new Game(ctxSnake, ctxFood);
 function start(){
 	game.init();
 
+    // canvas.addEventListener('touchmove', function (e) {
+    //     // stop touch event
+    //     e.stopPropagation();
+    //     e.preventDefault();
+    //
+    //     // translate to mouse event
+    //     var clkEvt = document.createEvent('MouseEvent');
+    //     clkEvt.initMouseEvent('mousemove', true, true, window, e.detail,
+    //         e.touches[0].screenX, e.touches[0].screenY,
+    //         e.touches[0].clientX, e.touches[0].clientY,
+    //         false, false, false, false,
+    //         0, null);
+    //
+    //     canvas.dispatchEvent(clkEvt);
+    // }, false);
+
 	function resizeCanvas() {
 			canvas.width = canvasFood.width = canvasHex.width = window.innerWidth;
 			canvas.height = canvasFood.height = canvasHex.height = window.innerHeight;

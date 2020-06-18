@@ -4,7 +4,7 @@ var IMAGE_ENEMY_SRC = "assets/image_bacteria.png",
 
 var GAME_FOOD_QUANTITY = 100;
 
-var WORLD_SIZE = new Point(window.innerWidth * 2, window.innerHeight * 2),
+var WORLD_SIZE = new Point(window.innerWidth, window.innerHeight),
     SCREEN_SIZE = new Point(window.innerWidth, window.innerHeight);
 
-var ENEMY_QUANTITY = 100;
+var ENEMY_QUANTITY = 20;
