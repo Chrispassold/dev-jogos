@@ -9,6 +9,8 @@ class Game {
         this.seconds = 1000;
 
         this.player = null
+
+        this.level = 1
     }
 
     init() {
@@ -62,6 +64,7 @@ class Game {
     }
 
     generateFoods(quantity) {
+        console.log("gerando " + quantity + " foods")
         for (var i = 0; i < quantity; i++) {
             this.foods.push(new Food(this.ctxFood, ut.random(50, SCREEN_SIZE.x - 50), ut.random(50, SCREEN_SIZE.y - 50)));
         }
@@ -84,6 +87,15 @@ class Game {
                 this.player.addScore();
             }
         }
+
+        if (game.foods.length === 0) {
+            this.nextLevel()
+        }
+    }
+
+    nextLevel() {
+        this.level += 1
+        this.generateFoods((1 + this.level / 5) * GAME_FOOD_QUANTITY)
     }
 
 }
