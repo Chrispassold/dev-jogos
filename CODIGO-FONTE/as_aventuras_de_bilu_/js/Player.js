@@ -12,7 +12,6 @@ class Player {
             this.pos.x = event.clientX;
             this.pos.y = event.clientY;
             game.checkCollissionFood(this)
-            console.log("oi")
         };
     }
 
