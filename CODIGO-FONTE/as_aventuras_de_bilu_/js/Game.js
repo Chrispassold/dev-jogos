@@ -5,7 +5,6 @@ class Game {
 
         this.WORLD_SIZE = WORLD_SIZE
         this.SCREEN_SIZE = SCREEN_SIZE
-        this.world = new Point(-1200, -600);
         this.snakes = [];
         this.foods = [];
         this.seconds = 2000;
@@ -28,7 +27,7 @@ class Game {
     draw() {
         //move other snakes
         for (var i = 1; i < this.snakes.length; i++)
-            if (this.snakes[i].state === 0) this.snakes[i].move(this.snakes[0]);
+            if (this.snakes[i].state === 0) this.snakes[i].move();
 
         //draw food
         for (var i = 0; i < this.foods.length; i++) this.foods[i].draw();

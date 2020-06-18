@@ -7,6 +7,14 @@ class SnakeAi extends Snake {
         this.pos = new Point(ut.random(0, WORLD_SIZE.x), ut.random(0, WORLD_SIZE.y));
         this.angle = ut.random(0, Math.PI);
 
+        document.onmousemove = (event) => {
+            this.position.x = event.clientX;
+            this.position.y = event.clientY;
+            this.move();
+
+            console.log(this.position.x, this.position.y)
+        };
+
         this.initAiMovement();
     }
 
@@ -29,9 +37,42 @@ class SnakeAi extends Snake {
         }, 100);
     }
 
+    checkBoundary() {
 
-    move(player) {
+        //left
+        if (this.position.x < 0) {
+            this.velocity.x *= -1;
+            this.angle = Math.PI - this.angle;
+        }
+
+        //right
+        else if (this.position.x > game.WORLD_SIZE.x) {
+            this.velocity.x *= -1;
+            this.angle = Math.PI - this.angle;
+        }
+
+        //up
+        else if (this.position.y < 0) {
+            this.velocity.y *= -1;
+            this.angle = Math.PI - this.angle;
+        }
+
+        //down
+        else if (this.position.y > game.WORLD_SIZE.y) {
+            this.velocity.y *= -1;
+            this.angle = Math.PI - this.angle;
+        }
+    }
+
+    move() {
+        this.velocity.x = this.force * Math.cos(this.angle);
+        this.velocity.y = this.force * Math.sin(this.angle);
+        this.pos.x += this.velocity.x;
+        this.pos.y += this.velocity.y;
+
         super.move()
+        this.checkBoundary();
+
         this.drawHeadOneEye();
         super.checkCollissionFood()
     }
@@ -40,18 +81,16 @@ class SnakeAi extends Snake {
         var x = this.pos.x;
         var y = this.pos.y;
 
-        if (this.isAi()) {
-            this.ctx.drawImage(
-                this.enemyImage,
-                0,
-                0,
-                IMAGE_ENEMY_WIDTH,
-                IMAGE_ENEMY_HEIGHT,
-                x,
-                y,
-                IMAGE_ENEMY_WIDTH,
-                IMAGE_ENEMY_HEIGHT
-            );
-        }
+        this.ctx.drawImage(
+            this.enemyImage,
+            0,
+            0,
+            IMAGE_ENEMY_WIDTH,
+            IMAGE_ENEMY_HEIGHT,
+            x,
+            y,
+            IMAGE_ENEMY_WIDTH,
+            IMAGE_ENEMY_HEIGHT
+        );
     }
 }

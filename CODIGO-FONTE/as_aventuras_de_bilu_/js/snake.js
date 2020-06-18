@@ -9,63 +9,17 @@ class Snake {
         this.enemyImage = new Image();
         this.enemyImage.src = IMAGE_ENEMY_SRC;
 
-        //
-        this.pos = new Point(game.SCREEN_SIZE.x / 2, game.SCREEN_SIZE.y / 2);
         this.velocity = new Point(0, 0); //arbitary point
 
-        this.size = 7;
+        this.size = 20;
         this.countFoodDie = 0;
 
         this.position = new Point(0,0)
 
-        if (!this.isAi()) {
-            document.onmousemove = (event) => {
-                this.position.x = event.clientX;
-                this.position.y = event.clientY;
-                this.move();
-            };
-        }
-    }
-
-    isAi() {
-        return this instanceof SnakeAi;
     }
 
     move() {
-        this.velocity.x = this.force * Math.cos(this.angle);
-        this.velocity.y = this.force * Math.sin(this.angle);
-        this.pos.x += this.velocity.x;
-        this.pos.y += this.velocity.y;
-
         this.checkCollissionFood();
-        this.checkBoundary();
-    }
-
-    checkBoundary() {
-
-        //left
-        if (this.position.x < game.world.x) {
-            this.velocity.x *= -1;
-            this.angle = Math.PI - this.angle;
-        }
-
-        //right
-        else if (this.position.x > game.world.x + game.WORLD_SIZE.x) {
-            this.velocity.x *= -1;
-            this.angle = Math.PI - this.angle;
-        }
-
-        //up
-        else if (this.position.y < game.world.y) {
-            this.velocity.y *= -1;
-            this.angle = Math.PI - this.angle;
-        }
-
-        //down
-        else if (this.position.y > game.world.y + game.WORLD_SIZE.y) {
-            this.velocity.y *= -1;
-            this.angle = Math.PI - this.angle;
-        }
     }
 
     //check snake and food collission
