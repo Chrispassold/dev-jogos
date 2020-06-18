@@ -7,14 +7,6 @@ class SnakeAi extends Snake {
         this.pos = new Point(ut.random(0, WORLD_SIZE.x), ut.random(0, WORLD_SIZE.y));
         this.angle = ut.random(0, Math.PI);
 
-        document.onmousemove = (event) => {
-            this.position.x = event.clientX;
-            this.position.y = event.clientY;
-            this.move();
-
-            console.log(this.position.x, this.position.y)
-        };
-
         this.initAiMovement();
     }
 
@@ -70,11 +62,8 @@ class SnakeAi extends Snake {
         this.pos.x += this.velocity.x;
         this.pos.y += this.velocity.y;
 
-        super.move()
         this.checkBoundary();
-
         this.drawHeadOneEye();
-        super.checkCollissionFood()
     }
 
     drawHeadOneEye() {

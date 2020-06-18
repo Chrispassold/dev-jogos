@@ -7,6 +7,7 @@ class Food {
         this.mainColor = ut.randomColor();
         this.supportColor = ut.color(this.mainColor, 0.5);
         this.size = ut.random(this.sizeMin, this.sizeMax);
+        this.state = 0;
     }
 
     draw() {

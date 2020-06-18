@@ -6,30 +6,44 @@ class Game {
         this.WORLD_SIZE = WORLD_SIZE
         this.snakes = [];
         this.foods = [];
-        this.seconds = 100;
+        this.seconds = 1000;
+
+        this.player = null
     }
 
     init() {
-        this.snakes[0] = new Snake(this.ctxSnake, localStorage.getItem('name'), 0);
-        for (var i = 0; i < ENEMY_QUANTITY; i++) this.addSnake(ut.randomName(), i + 1);
-
+        this.createPlayer()
+        this.addAllEnemies()
         this.generateFoods(GAME_FOOD_QUANTITY);
+        this.createCounter();
+    }
 
+    createPlayer() {
+        this.player = new Player(localStorage.getItem('name'))
+    }
+
+    addAllEnemies() {
+        for (var i = 0; i < ENEMY_QUANTITY; i++)
+            this.addSnake(ut.randomName(), i + 1);
+    }
+
+    createCounter() {
         setInterval(() => {
             this.seconds--;
             if (this.seconds === 0) {
-                window.location.href = `finish.html?pontos=${this.snakes[0].score}`;
+                window.location.href = `finish.html?pontos=${this.player.score}`;
             }
         }, 1000);
     }
 
     draw() {
         //move other snakes
-        for (var i = 1; i < this.snakes.length; i++)
+        for (var i = 0; i < this.snakes.length; i++)
             if (this.snakes[i].state === 0) this.snakes[i].move();
 
         //draw food
-        for (var i = 0; i < this.foods.length; i++) this.foods[i].draw();
+        for (var i = 0; i < this.foods.length; i++)
+            this.foods[i].draw();
 
         this.drawScore();
 
@@ -38,9 +52,8 @@ class Game {
     drawScore() {
         var start = new Point(20, 20);
         if (this.snakes && this.snakes.length > 0) {
-            this.ctxSnake.fillStyle = this.snakes[0].mainColor;
             this.ctxSnake.font = "bold 20px Arial";
-            this.ctxSnake.fillText(this.snakes[0].name + " " + this.snakes[0].score + ' pontos' + ', tempo restante: ' + this.seconds + ' segundos', start.x - 5, start.y);
+            this.ctxSnake.fillText(this.player.name + " " + this.player.score + ' pontos' + ', tempo restante: ' + this.seconds + ' segundos', start.x - 5, start.y);
         }
     }
 
@@ -48,9 +61,28 @@ class Game {
         this.snakes.push(new SnakeAi(this.ctxSnake, name, id, '#000000'))
     }
 
-    generateFoods(n) {
-        for (var i = 0; i < n; i++) {
+    generateFoods(quantity) {
+        for (var i = 0; i < quantity; i++) {
             this.foods.push(new Food(this.ctxFood, ut.random(50, SCREEN_SIZE.x - 50), ut.random(50, SCREEN_SIZE.y - 50)));
+        }
+    }
+
+    //check snake and food collission
+    checkCollissionFood(player) {
+        for (var i = 0; i < game.foods.length; i++) {
+            if (
+                ut.cirCollission(
+                    player.pos.x,
+                    player.pos.y,
+                    this.player.size,
+                    game.foods[i].pos.x,
+                    game.foods[i].pos.y,
+                    game.foods[i].size
+                )
+            ) {
+                game.foods[i].die();
+                this.player.addScore();
+            }
         }
     }
 
