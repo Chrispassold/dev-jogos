@@ -1,0 +1,3 @@
+Christian - Melhor entendimento do código, ajuste para o mouse ser o jogador, ajuste nas movimentações dos inimigos
+Pedro - Atualização dos conceitos do jogo no Game Treatment, ajuste da imagem da escova e pesquisa de vídos e animações para a abertura do jogo
+Jorge - logica para pontuação, criação de jogo, e métricas
