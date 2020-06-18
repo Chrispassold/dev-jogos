@@ -52,7 +52,7 @@ class Game {
 
     generateFoods(n) {
         for (var i = 0; i < n; i++) {
-            this.foods.push(new Food(this.ctxFood, ut.random(0, SCREEN_SIZE.x), ut.random(0, SCREEN_SIZE.y)));
+            this.foods.push(new Food(this.ctxFood, ut.random(50, SCREEN_SIZE.x - 50), ut.random(50, SCREEN_SIZE.y - 50)));
         }
     }
 

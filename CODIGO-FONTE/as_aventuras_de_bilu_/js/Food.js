@@ -25,8 +25,7 @@ class Food {
 
     die() {
         this.state = 1;
-        var index = game.foods.indexOf(this);
-        game.foods.splice(index, 1);
+        game.foods.splice(game.foods.indexOf(this), 1);
     }
 
 
