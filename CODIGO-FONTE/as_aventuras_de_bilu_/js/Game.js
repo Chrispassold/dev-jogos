@@ -4,10 +4,9 @@ class Game {
         this.ctxFood = ctxFood;
 
         this.WORLD_SIZE = WORLD_SIZE
-        this.SCREEN_SIZE = SCREEN_SIZE
         this.snakes = [];
         this.foods = [];
-        this.seconds = 2000;
+        this.seconds = 100;
     }
 
     init() {
