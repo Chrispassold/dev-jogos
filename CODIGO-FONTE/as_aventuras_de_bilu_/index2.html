@@ -10,19 +10,20 @@
   <style>
     #container {
       position: absolute;
-      height: 101vh;
-      width: 101%;
+      height: 105vh;
+      width: 105%;
+      left: -20px;
+      top: -20px;
       position: -20px;
       border: solid 1px red;
-      display: flex;
-      justify-content: center;
-      align-items: center;
       overflow: hidden;
     }
 
     .slide {
       width: 100%;
-      background: rgba(0, 0, 0, 0.8);
+      background: rgba(124, 26, 26, 0.8);
+      border-radius: 10px;
+      box-shadow: 0px 3px 6px #000000;
     }
 
     input {
@@ -45,27 +46,32 @@
 </head>
 
 <body style="overflow: hidden; margin: 0px; padding: 0px;">
-  <div class="container-fluid">
+  <div class="container-fluid" id="container">
     <img src="./assets/background.JPG" />
     <div class="row">
-      <div class="slide one col-md-3 offset-md-2">
-        <h1 style="color: white; text-align: center;">Novo jogo</h1>
-        <input id="val" class="form-control" placeholder="Digite seu nome" onkeydown="key(this)">
-        <br>
-        <a href="index.html" class="btn btn-dark">
-          Inciar novo jogo
-        </a>
-        <br>
+      <div class="col-md-3 offset-md-1 mt-5 pt-5 ">
+        <div class="slide one p-3">
+          <h1 class="p-3" style="color: white; text-align: center;">Novo jogo</h1>
+          <input id="val" class="form-control" placeholder="Digite seu nome" onkeydown="key(this)">
+          <br>
+          <p class="text-center">
+            <a href="index.html" class="btn btn-dark mb-3">
+              Inciar novo jogo
+            </a>
+          </p>
+        </div>
       </div>
-      <div class="col-md-6 offset-md-1">
-        <div class="slide one">
-          <h1>Pontuações</h1>
-          <table class="table table-dark">
+      <div class="col-md-6 offset-md-1 mt-5 pt-5">
+        <div class="slide one p-3">
+          <h1 class="p-3" style="color: white; text-align: center;">Ranking</h1>
+          <table class="table table-dark" id="myTable">
             <thead>
               <th>Nome</th>
               <th>Pontuação</th>
-              <th>Tempo</th>
             </thead>
+            <tbody>
+
+            </tbody>
           </table>
         </div>
       </div>
@@ -75,6 +81,24 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.3.0/gsap.min.js"></script>
   <script>
     var timeout;
+
+    $('document').ready(() => {
+        const ranking = localStorage.getItem('ranking');
+        if (ranking) {
+            const rankingList = JSON.parse(ranking);
+            if (rankingList && rankingList.length > 0) {
+                rankingList.sort((v1, v2) => parseInt(v2.points) - parseInt(v1.points));
+                debugger
+                rankingList.forEach(element => {
+                    $('#myTable > tbody:last-child').append(`<tr><td>${element.name}</td><td>${element.points}</td></tr>`);
+                });
+            } else {
+                $('#myTable > tbody:last-child').append('<tr><td colspan="4">Nenhum jogo iniciado</td></tr>');
+            }
+        } else {
+            $('#myTable > tbody:last-child').append('<tr><td colspan="4">Nenhum jogo iniciado</td></tr>');
+        }
+    })
 
     function key(item) {
       localStorage.setItem('name', $('#val').val());

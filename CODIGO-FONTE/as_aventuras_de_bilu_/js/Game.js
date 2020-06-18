@@ -8,7 +8,7 @@ class Game {
         this.world = new Point(-1200, -600);
         this.snakes = [];
         this.foods = [];
-        this.seconds = 3000;
+        this.seconds = 10;
     }
 
     init() {
@@ -20,7 +20,7 @@ class Game {
         setInterval(() => {
             this.seconds--;
             if (this.seconds === 0) {
-                window.location.href = "gamehomer.html"
+                window.location.href = `finish.html?pontos=${this.snakes[0].score}`;
             }
         }, 1000);
     }
