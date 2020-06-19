@@ -7,6 +7,9 @@ class SnakeAi extends Snake {
         this.pos = new Point(ut.random(0, WORLD_SIZE.x), ut.random(0, WORLD_SIZE.y));
         this.angle = ut.random(0, Math.PI);
 
+        this.enemyImage = new Image();
+        this.enemyImage.src = IMAGE_ENEMY_SRC;
+
         this.initAiMovement();
     }
 
