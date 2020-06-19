@@ -1,7 +1,10 @@
-class SnakeAi extends Snake {
+class Enemy {
     constructor(ctx, name, id, color) {
 
-        super(ctx, name, id, color, 95);
+        this.ctx = ctx;
+        this.name = name;
+        this.velocity = new Point(0, 0); //arbitary point
+        this.position = new Point(0,0)
 
         this.force = 4;
         this.pos = new Point(ut.random(0, WORLD_SIZE.x), ut.random(0, WORLD_SIZE.y));

@@ -2,12 +2,11 @@ class Food {
     constructor(ctx, x, y) {
         this.ctx = ctx;
         this.pos = new Point(x, y);
-        this.sizeMin = 2;
-        this.sizeMax = 6;
+        this.sizeMin = 3;
+        this.sizeMax = 10;
         this.mainColor = ut.randomColor();
         this.supportColor = ut.color(this.mainColor, 0.5);
         this.size = ut.random(this.sizeMin, this.sizeMax);
-        this.state = 0;
     }
 
     draw() {
@@ -25,7 +24,6 @@ class Food {
     }
 
     die() {
-        this.state = 1;
         game.foods.splice(game.foods.indexOf(this), 1);
     }
 
