@@ -27,5 +27,20 @@ class Food {
         game.foods.splice(game.foods.indexOf(this), 1);
     }
 
+    checkCollisionPlayer(player) {
+        if (
+            ut.cirCollission(
+                player.pos.x,
+                player.pos.y,
+                player.size,
+                this.pos.x,
+                this.pos.y,
+                this.size
+            )
+        ) {
+            this.die();
+            player.addScore();
+        }
+    }
 
 }

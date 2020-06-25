@@ -39,15 +39,17 @@ class Game {
 
     draw() {
         //move other snakes
-        for (var i = 0; i < this.enemies.length; i++)
-            this.enemies[i].move();
+        this.enemies.forEach((item) => item.move())
 
         //draw food
-        for (var i = 0; i < this.foods.length; i++)
-            this.foods[i].draw();
+        this.foods.forEach((item) => item.draw())
+        this.foods.forEach((item) => item.checkCollisionPlayer(game.player))
 
         this.drawScore();
 
+        if (this.foods.length === 0) {
+            this.nextLevel()
+        }
     }
 
     drawScore() {
@@ -64,48 +66,6 @@ class Game {
         console.log("gerando " + quantity + " foods")
         for (var i = 0; i < quantity; i++) {
             this.foods.push(new Food(this.ctxFood, ut.random(50, SCREEN_SIZE.x - 50), ut.random(50, SCREEN_SIZE.y - 50)));
-        }
-    }
-
-    //check snake and food collission
-    checkCollissionEnemy(player) {
-        game.enemies.forEach((enemy) => {
-            if (
-                ut.cirCollission(
-                    player.pos.x,
-                    player.pos.y,
-                    this.player.size,
-                    enemy.pos.x,
-                    enemy.pos.y,
-                    enemy.size
-                )
-            ) {
-                enemy.die();
-                this.player.addScore(10);
-            }
-        })
-    }
-
-    //check snake and food collission
-    checkCollissionFood(player) {
-        game.foods.forEach((food) => {
-            if (
-                ut.cirCollission(
-                    player.pos.x,
-                    player.pos.y,
-                    this.player.size,
-                    food.pos.x,
-                    food.pos.y,
-                    food.size
-                )
-            ) {
-                food.die();
-                this.player.addScore();
-            }
-        })
-
-        if (game.foods.length === 0) {
-            this.nextLevel()
         }
     }
 

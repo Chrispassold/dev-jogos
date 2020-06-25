@@ -17,6 +17,8 @@ class Enemy {
     }
 
     move() {
+        this.checkCollisionPlayer(game.player)
+
         this.velocity.x = this.force * Math.cos(this.angle);
         this.velocity.y = this.force * Math.sin(this.angle);
         this.pos.x += this.velocity.x;
@@ -45,4 +47,21 @@ class Enemy {
             IMAGE_ENEMY_HEIGHT
         );
     }
+
+    checkCollisionPlayer(player){
+        if (
+            ut.cirCollission(
+                player.pos.x,
+                player.pos.y,
+                player.size,
+                this.pos.x,
+                this.pos.y,
+                player.size
+            )
+        ) {
+            this.die();
+            player.addScore(10);
+        }
+    }
+
 }

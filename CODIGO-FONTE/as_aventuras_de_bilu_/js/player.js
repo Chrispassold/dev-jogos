@@ -10,8 +10,6 @@ class Player {
         document.onmousemove = (event) => {
             this.pos.x = event.clientX;
             this.pos.y = event.clientY;
-            game.checkCollissionFood(this)
-            game.checkCollissionEnemy(this)
         };
     }
 
