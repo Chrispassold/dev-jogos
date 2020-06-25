@@ -18,7 +18,7 @@ class Game {
 
         setInterval(() => {
             //gerar randomicamente
-            if (ut.random(0, 1000) > 980) {
+            if (ut.random(0, 1000) > 100) {
                 this.createEnemy();
             }
         }, 5000)
@@ -52,10 +52,8 @@ class Game {
 
     drawScore() {
         var start = new Point(20, 20);
-        if (this.enemies && this.enemies.length > 0) {
-            this.ctxSnake.font = "bold 20px Arial";
-            this.ctxSnake.fillText(this.player.name + " " + this.player.score + ' pontos' + ', tempo restante: ' + this.seconds + ' segundos', start.x - 5, start.y);
-        }
+        this.ctxSnake.font = "bold 20px Arial";
+        this.ctxSnake.fillText(this.player.name + " " + this.player.score + ' pontos' + ', tempo restante: ' + this.seconds + ' segundos', start.x - 5, start.y);
     }
 
     createEnemy() {
@@ -71,44 +69,40 @@ class Game {
 
     //check snake and food collission
     checkCollissionEnemy(player) {
-        for (var i = 0; i < game.foods.length; i++) {
+        game.enemies.forEach((enemy) => {
             if (
                 ut.cirCollission(
                     player.pos.x,
                     player.pos.y,
                     this.player.size,
-                    game.foods[i].pos.x,
-                    game.foods[i].pos.y,
-                    game.foods[i].size
+                    enemy.pos.x,
+                    enemy.pos.y,
+                    enemy.size
                 )
             ) {
-                game.foods[i].die();
+                enemy.die();
                 this.player.addScore(10);
             }
-        }
-
-        if (game.foods.length === 0) {
-            this.nextLevel()
-        }
+        })
     }
 
     //check snake and food collission
     checkCollissionFood(player) {
-        for (var i = 0; i < game.foods.length; i++) {
+        game.foods.forEach((food) => {
             if (
                 ut.cirCollission(
                     player.pos.x,
                     player.pos.y,
                     this.player.size,
-                    game.foods[i].pos.x,
-                    game.foods[i].pos.y,
-                    game.foods[i].size
+                    food.pos.x,
+                    food.pos.y,
+                    food.size
                 )
             ) {
-                game.foods[i].die();
+                food.die();
                 this.player.addScore();
             }
-        }
+        })
 
         if (game.foods.length === 0) {
             this.nextLevel()
