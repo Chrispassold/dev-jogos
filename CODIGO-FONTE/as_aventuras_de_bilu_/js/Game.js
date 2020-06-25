@@ -3,7 +3,6 @@ class Game {
         this.ctxSnake = ctxSnake;
         this.ctxFood = ctxFood;
 
-        this.WORLD_SIZE = WORLD_SIZE
         this.enemies = [];
         this.foods = [];
         this.seconds = 1000;
@@ -14,18 +13,19 @@ class Game {
 
     init() {
         this.createPlayer()
-        this.addAllEnemies()
         this.generateFoods(GAME_FOOD_QUANTITY);
         this.createCounter();
+
+        setInterval(() => {
+            //gerar randomicamente
+            if (ut.random(0, 1000) > 980) {
+                this.createEnemy();
+            }
+        }, 5000)
     }
 
     createPlayer() {
         this.player = new Player(localStorage.getItem('name'))
-    }
-
-    addAllEnemies() {
-        for (var i = 0; i < ENEMY_QUANTITY; i++)
-            this.addSnake(ut.randomName(), i + 1);
     }
 
     createCounter() {
@@ -58,8 +58,8 @@ class Game {
         }
     }
 
-    addSnake(name, id) {
-        this.enemies.push(new Enemy(this.ctxSnake, name, id, '#000000'))
+    createEnemy() {
+        this.enemies.push(new Enemy(this.ctxSnake, "", "", '#000000'))
     }
 
     generateFoods(quantity) {
@@ -83,7 +83,7 @@ class Game {
                 )
             ) {
                 game.foods[i].die();
-                this.player.addScore();
+                this.player.addScore(10);
             }
         }
 

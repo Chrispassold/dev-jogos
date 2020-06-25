@@ -2,7 +2,7 @@ class Food {
     constructor(ctx, x, y) {
         this.ctx = ctx;
         this.pos = new Point(x, y);
-        this.sizeMin = 3;
+        this.sizeMin = 5;
         this.sizeMax = 10;
         this.mainColor = ut.randomColor();
         this.supportColor = ut.color(this.mainColor, 0.5);

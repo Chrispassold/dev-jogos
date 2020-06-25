@@ -7,4 +7,4 @@ var GAME_FOOD_QUANTITY = 15;
 var WORLD_SIZE = new Point(window.innerWidth, window.innerHeight),
     SCREEN_SIZE = new Point(window.innerWidth, window.innerHeight);
 
-var ENEMY_QUANTITY = 1;
+var ENEMY_LIFETIME = 2000; //ms

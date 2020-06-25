@@ -5,18 +5,18 @@ class Player {
         this.name = name;
         this.score = 0;
         this.pos = new Point(0, 0);
-        this.state = 0;
         this.size = 20;
 
         document.onmousemove = (event) => {
             this.pos.x = event.clientX;
             this.pos.y = event.clientY;
             game.checkCollissionFood(this)
+            game.checkCollissionEnemy(this)
         };
     }
 
-    addScore() {
-        this.score += 1
+    addScore(multipler) {
+        this.score += multipler || 1
     }
 
 }
