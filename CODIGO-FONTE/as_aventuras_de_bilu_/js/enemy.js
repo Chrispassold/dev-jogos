@@ -4,21 +4,21 @@ class Enemy {
         this.ctx = ctx;
         this.velocity = new Point(0, 0); //arbitary point
 
-        this.force = 10;
+        this.force = 5;
         this.pos = new Point(ut.random(0, WORLD_SIZE.x), ut.random(0, WORLD_SIZE.y));
         this.angle = ut.random(0, Math.PI);
 
         this.enemyImage = new Image();
         this.enemyImage.src = IMAGE_ENEMY_SRC;
 
-        setTimeout(()=> {
+        this.size = IMAGE_ENEMY_WIDTH / 2;
+
+        setTimeout(() => {
             this.die();
         }, ENEMY_LIFETIME)
     }
 
     move() {
-        this.checkCollisionPlayer(game.player)
-
         this.velocity.x = this.force * Math.cos(this.angle);
         this.velocity.y = this.force * Math.sin(this.angle);
         this.pos.x += this.velocity.x;
@@ -48,7 +48,7 @@ class Enemy {
         );
     }
 
-    checkCollisionPlayer(player){
+    checkCollisionPlayer(player) {
         if (
             ut.cirCollission(
                 player.pos.x,
@@ -56,7 +56,7 @@ class Enemy {
                 player.size,
                 this.pos.x,
                 this.pos.y,
-                player.size
+                this.size
             )
         ) {
             this.die();

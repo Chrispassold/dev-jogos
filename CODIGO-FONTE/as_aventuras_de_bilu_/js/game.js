@@ -18,10 +18,10 @@ class Game {
 
         setInterval(() => {
             //gerar randomicamente
-            if (ut.random(0, 1000) > 100) {
+            if (ut.random(0, 1000) > 800) {
                 this.createEnemy();
             }
-        }, 5000)
+        }, ENEMY_LIFETIME)
     }
 
     createPlayer() {
@@ -38,12 +38,18 @@ class Game {
     }
 
     draw() {
-        //move other snakes
-        this.enemies.forEach((item) => item.move())
 
         //draw food
-        this.foods.forEach((item) => item.draw())
-        this.foods.forEach((item) => item.checkCollisionPlayer(game.player))
+        this.foods.forEach((item) => {
+            item.draw()
+            item.checkCollisionPlayer(game.player)
+        })
+
+        //move other snakes
+        this.enemies.forEach((item) => {
+            item.move()
+            item.checkCollisionPlayer(game.player)
+        })
 
         this.drawScore();
 
