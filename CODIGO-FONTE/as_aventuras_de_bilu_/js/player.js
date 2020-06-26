@@ -1,7 +1,6 @@
 class Player {
 
     constructor(name) {
-        this.id = ut.uuid();
         this.name = name;
         this.score = 0;
         this.pos = new Point(0, 0);

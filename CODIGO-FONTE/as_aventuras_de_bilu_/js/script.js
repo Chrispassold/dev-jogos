@@ -7,6 +7,8 @@ var ctxFood = canvasFood.getContext("2d");
 
 var ut = new Util();
 var game = new Game(ctxSnake, ctxFood);
+var firebaseInstance = new Firebase(firebase)
+var databaseInstance = firebaseInstance.getDatabase()
 
 function start(){
 	game.init();

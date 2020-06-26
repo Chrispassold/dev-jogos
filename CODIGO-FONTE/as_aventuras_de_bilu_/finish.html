@@ -59,35 +59,23 @@
             <span class="btn btn-dark">Jogar novamente</span>
         </a>
     </div>
+
+
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.3.0/gsap.min.js"></script>
+
     <script>
         var timeout;
-
         $('document').ready(() => {
             const queryString = window.location.search;
             const urlParams = new URLSearchParams(queryString);
-            $('#pontos').html(urlParams.get('pontos'));
-            const ranking = localStorage.getItem('ranking');
-            debugger
-            if (ranking) {
-                const rankingList = JSON.parse(ranking)
-                rankingList.push({
-                    name: localStorage.getItem('name'),
-                    points: urlParams.get('pontos')
-                });
-                localStorage.setItem('ranking', JSON.stringify(rankingList));
-            } else {
-                localStorage.setItem('ranking', JSON.stringify([{
-                    name: localStorage.getItem('name'),
-                    points: urlParams.get('pontos')
-                }]));
-            }
-        })
 
-        function key(item) {
-            localStorage.setItem('name', $('#val').val());
-        }
+            const params = {
+                score: urlParams.get('pontos')
+            }
+
+            $('#pontos').html(params.score);
+        })
 
         $('#container').mousemove(function (e) {
             if (timeout) clearTimeout(timeout);

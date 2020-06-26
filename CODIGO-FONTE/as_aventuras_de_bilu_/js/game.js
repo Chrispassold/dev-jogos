@@ -5,7 +5,7 @@ class Game {
 
         this.enemies = [];
         this.foods = [];
-        this.seconds = 1000;
+        this.seconds = GAME_TIMEOUT;
 
         this.player = null
         this.level = 1
@@ -32,9 +32,14 @@ class Game {
         setInterval(() => {
             this.seconds--;
             if (this.seconds === 0) {
-                window.location.href = `finish.html?pontos=${this.player.score}`;
+                this.endGame()
             }
         }, 1000);
+    }
+
+    endGame(){
+        databaseInstance.writeScore(this.player.name, this.player.score, this.level)
+        window.location.href = `finish.html?pontos=${this.player.score}`;
     }
 
     draw() {
