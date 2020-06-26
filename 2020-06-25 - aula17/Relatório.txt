@@ -1,0 +1,3 @@
+Christian - Conexão do ranking com o firebase para ser real time
+Pedro - Pesquisa de novas imagens e alteração da capa do jogo por ilustrações sem copyright ou para uso educacional
+Jorge - 

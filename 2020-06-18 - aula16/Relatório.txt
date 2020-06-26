@@ -1,0 +1,3 @@
+Christian - Definição de algumas funcionalidades, alteração do código para ter fases no jogo e geração de comida aleatória
+Pedro - Pesquisa de imagens e criação da capa do jogo
+Jorge - Criado logica para salvar as melhores jogadas
