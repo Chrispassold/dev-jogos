@@ -4,7 +4,9 @@ const IMAGE_ENEMY_SRC = "assets/image_bacteria.png",
 
 const GAME_FOOD_QUANTITY = 15;
 
-const GAME_TIMEOUT = 5; //sec
+const LOCAL_STORAGE_NAME = "name";
+
+const GAME_TIMEOUT = 60; //sec
 
 const WORLD_SIZE = new Point(window.innerWidth, window.innerHeight),
     SCREEN_SIZE = new Point(window.innerWidth, window.innerHeight);

@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
-          integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+        integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
     <title>As aventuras de bilu</title>
     <style>
         #container {
@@ -46,125 +46,104 @@
 </head>
 
 <body style="overflow: hidden; margin: 0px; padding: 0px;">
-<div class="container-fluid" id="container">
-    <img src="./assets/background.JPG"/>
-    <div class="row">
-        <div class="col-md-3 offset-md-1 mt-5 pt-5 ">
-            <div class="slide one p-3">
-                <h1 class="p-3" style="color: white; text-align: center;">Novo jogo</h1>
-                <input id="username" class="form-control" placeholder="Digite seu nome">
-                <br>
-                <p class="text-center">
-                    <a href="#" class="btn btn-dark mb-3" onclick="newGame(this)">
-                        Inciar novo jogo
-                    </a>
-                </p>
+    <div class="container-fluid" id="container">
+        <img src="./assets/background.JPG" />
+        <div class="row">
+            <div class="col-md-3 offset-md-1 mt-5 pt-5 ">
+                <div class="slide one p-3">
+                    <h1 class="p-3" style="color: white; text-align: center;">Novo jogo</h1>
+                    <input id="username" class="form-control" placeholder="Digite seu nome">
+                    <br>
+                    <p class="text-center">
+                        <a href="#" class="btn btn-dark mb-3" onclick="newGame(this)">
+                            Inciar novo jogo
+                        </a>
+                    </p>
+                </div>
             </div>
-        </div>
-        <div class="col-md-6 offset-md-1 mt-5 pt-5">
-            <div class="slide one p-3">
-                <h1 class="p-3" style="color: white; text-align: center;">Ranking</h1>
-                <div class="loader"></div>
-                <table class="table table-dark" id="myTable">
-                    <thead>
-                    <th>Nome</th>
-                    <th>Pontuação</th>
-                    </thead>
-                    <tbody>
+            <div class="col-md-6 offset-md-1 mt-5 pt-5">
+                <div class="slide one p-3">
+                    <h1 class="p-3" style="color: white; text-align: center;">Ranking</h1>
+                    <div class="loader"></div>
+                    <table class="table table-dark" id="myTable">
+                        <thead>
+                            <th>Nome</th>
+                            <th>Pontuação</th>
+                        </thead>
+                        <tbody>
 
-                    </tbody>
-                </table>
+                        </tbody>
+                    </table>
+                </div>
             </div>
         </div>
     </div>
-</div>
 
 
-<!-- TODO: Add SDKs for Firebase products that you want to use
+    <!-- TODO: Add SDKs for Firebase products that you want to use
      https://firebase.google.com/docs/web/setup#available-libraries -->
 
-<!-- The core Firebase JS SDK is always required and must be listed first -->
-<script src="https://www.gstatic.com/firebasejs/7.15.5/firebase-app.js"></script>
-<script src="https://www.gstatic.com/firebasejs/7.15.5/firebase-database.js"></script>
+    <!-- The core Firebase JS SDK is always required and must be listed first -->
+    <script src="https://www.gstatic.com/firebasejs/7.15.5/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.15.5/firebase-database.js"></script>
 
 
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.3.0/gsap.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.3.0/gsap.min.js"></script>
 
-<script src="js/firebase.js"></script>
+    <script src="js/firebase.js"></script>
 
-<script>
-    var timeout;
-    var firebaseInstance = null
-    $('document').ready(() => {
-        firebaseInstance = new Firebase(firebase)
-        const database = firebaseInstance.getDatabase()
-        showLoadingRanking()
-
-        database.listenScores((values) => {
-            const scores = []
-            const keys = Object.keys(values)
-            keys.forEach((key) => {
-                const element = values[key]
-                scores.push({
-                    username: element.username,
-                    level: element.level,
-                    score: element.score
+    <script>
+        var timeout;
+        var firebaseInstance = null
+        $('document').ready(() => {
+            firebaseInstance = new Firebase(firebase)
+            const database = firebaseInstance.getDatabase()
+            showLoadingRanking()
+            localStorage.clear()
+            database.listenScores((values) => {
+                const scores = []
+                const keys = Object.keys(values)
+                keys.forEach((key) => {
+                    const element = values[key]
+                    scores.push({
+                        username: element.username,
+                        level: element.level,
+                        score: element.score
+                    })
                 })
+
+                updateRanking(scores)
             })
-
-            updateRanking(scores)
         })
-    })
 
-    function newGame(event) {
-        localStorage.setItem('name', $("#username").val());
-        window.location.href = `game.html`;
-    }
-
-    function showLoadingRanking() {
-        $("#myTable > tbody").empty();
-        $('#myTable > tbody:last-child').append(`<tr class="loading"><td colspan="2" style="text-align: center">Carregando...</td></tr>`);
-    }
-
-    function hideLoadingRanking() {
-        $('#myTable > tbody tr.loading').remove();
-    }
-
-    function updateRanking(data) {
-        hideLoadingRanking()
-        if (data && data.length > 0) {
-            data.sort((v1, v2) => parseInt(v2.score) - parseInt(v1.score));
-            data.forEach(element => {
-                $('#myTable > tbody:last-child').append(`<tr class="hdn"><td>${element.username}</td><td>${element.score}</td></tr>`);
-            });
-        } else {
-            $('#myTable > tbody:last-child').append('<tr class="hdn"><td colspan="4">Nenhum jogo iniciado</td></tr>');
+        function newGame(event) {
+            localStorage.setItem(LOCAL_STORAGE_NAME, $("#username").val());
+            window.location.href = `game.html`;
         }
-    }
 
-    $('#container').mousemove(function (e) {
-        if (timeout) clearTimeout(timeout);
-        setTimeout(callParallax.bind(null, e), 200);
-    });
+        function showLoadingRanking() {
+            $("#myTable > tbody").empty();
+            $('#myTable > tbody:last-child').append(`<tr class="loading"><td colspan="2" style="text-align: center">Carregando...</td></tr>`);
+        }
 
-    function callParallax(e) {
-        parallaxIt(e, '.slide', -100);
-        parallaxIt(e, 'img', -30);
-    }
+        function hideLoadingRanking() {
+            $('#myTable > tbody tr.loading').remove();
+        }
 
-    function parallaxIt(e, target, movement) {
-        var $this = $('#container');
-        var relX = e.pageX - $this.offset().left;
-        var relY = e.pageY - $this.offset().top;
+        function updateRanking(data) {
+            hideLoadingRanking()
+            if (data && data.length > 0) {
+                data.sort((v1, v2) => parseInt(v2.score) - parseInt(v1.score));
+                data.forEach(element => {
+                    $('#myTable > tbody:last-child').append(`<tr class="hdn"><td>${element.username}</td><td>${element.score}</td></tr>`);
+                });
+            } else {
+                $('#myTable > tbody:last-child').append('<tr class="hdn"><td colspan="4">Nenhum jogo iniciado</td></tr>');
+            }
+        }
 
-        TweenMax.to(target, 1, {
-            x: (relX - $this.width() / 2) / $this.width() * movement,
-            y: (relY - $this.height() / 2) / $this.height() * movement,
-            ease: Power2.easeOut
-        })
-    }
-</script>
+    </script>
 
 
 </body>
